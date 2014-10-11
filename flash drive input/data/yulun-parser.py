@@ -1,3 +1,5 @@
+#import DecisionTree
+
 input_file=open("training.csv","r")
 output_file=open("output.txt","w")
 array=[]
@@ -105,3 +107,4 @@ for line in input_file:
 for elem in array:
 	#print elem
 	output_file.write(str(elem))
+	output_file.write("\n")
