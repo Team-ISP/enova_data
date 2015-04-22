@@ -1,9 +1,11 @@
-#import DecisionTree
+from sklearn import tree
+import pdb
 
 input_file=open("training.csv","r")
 output_file=open("output.txt","w")
 array=[]
 counter=0
+result=[]
 for line in input_file:
 	line=line.strip()
 	split_string=line.split(";")
@@ -84,6 +86,10 @@ for line in input_file:
 	split_string[-6]=temp
 
 
+	temp=split_string[23]
+	temp=temp[:-2]
+	split_string[23]=temp
+
 
 	temp=split_string[-5]
 	temp=temp[1:-2]
@@ -98,9 +104,9 @@ for line in input_file:
 		split_string[-2]=1
 
 	if split_string[-1]>0:
-		split_string.append(1)
+		result.append(1)
 	else:
-		split_string.append(0)
+		result.append(0)
 
 	array.append(split_string)
 
@@ -108,3 +114,18 @@ for elem in array:
 	#print elem
 	output_file.write(str(elem))
 	output_file.write("\n")
+
+
+counter=1
+x=[]
+while counter < len(array):
+	x.append(array[counter])
+	counter+=1
+print "builing tree"
+print x[0]
+print result[0]
+print x[1]
+print result[1]
+
+clf=tree.DecisionTreeClassifier()
+clf=clf.fit(x,result)
